@@ -3,8 +3,44 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
-<body>
+<header>
+    HANGMAN
+</header>
 
+<body>
+<button id="newWord" class="newWord">
+   NEW WORD
+</button>
+
+
+<div id="wordCard">
+
+PRESS THE BUTTON
+    
+</div>
+
+<script type="text/javascript">
+    
+    $(function(ready) {
+        var library = ["A","B","C","D","E"];
+        
+        $("#newWord").click(function(e){
+        
+            var newClass = parseInt(Math.floor(Math.random() * library.length));
+            console.log(library[parseInt(newClass)]);
+            document.getElementById("wordCard").innerHTML = (library[parseInt(newClass)]);
+                
+            }
+        );
+    
+        
+
+
+
+    });
+
+
+</script>
 
 
 
