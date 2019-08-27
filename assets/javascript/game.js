@@ -1,4 +1,7 @@
 
+    
+
+    
     var library = ["Alpha","Beta","C","Delta"];
     const lives = 7;
     var guessedLetters = [];
@@ -18,9 +21,15 @@
         guessedLetters = [];
         thisWord = [];
 
+        document.getElementById("title-image").src = "";
+
         for (var i = 0; i < library[currentWordIndex].length; i++) {
             thisWord.push("_");
         }
+
+        document.getElementById("tryAgain").style.cssText = "display: none";
+        document.getElementById("gameover-image").style.cssText = "display: none";
+        document.getElementById("youwin-image").style.cssText = "display: none";
 
             updateDisplay();
     };
@@ -29,7 +38,7 @@
 
         document.getElementById("currentWord").innerText = "";
         for (var i = 0; i < thisWord.length; i++) {
-            document.getElementById("thisWord").innerText += guessingWord[i];
+            document.getElementById("thisWord").innerText += thisWord[i];
         }
         document.getElementById("remainingGuesses").innerText = remainingGuesses;
         document.getElementById("guessedLetters").innerText = guessedLetters;
@@ -74,7 +83,7 @@
     function evaluateGuess(letter) {
         var positions = [];
 
-        for (var i = 0; i < selectableWords[currentWordIndex].length; i++) {
+        for (var i = 0; i < library[currentWordIndex].length; i++) {
             if(library[currentWordIndex][i] === letter) {
                 positions.push(i);
             }
@@ -85,8 +94,8 @@
             updateHangmanImage();
         } else {
 
-            for (var i=0; i <positions.length; i++) {
-                guessingWord[positions[i]] = letter;
+            for (var i=0; i < positions.length; i++) {
+                thisWord[positions[i]] = letter;
             }
         }
     
@@ -94,12 +103,13 @@
     };
 
     function checkWin() {
-        if(guessingWord.indexof("_") === 1 {
+        if(thisWord.indexof("_") === -1 {
             document.getElementById("youwin-image").style.cssText = "display: block";
             document.getElementById("tryAgain").style.cssText = "display: block";
             wins++;
-            hasFinished = true;
+            finish = true;
         }
 
     
 };
+        
