@@ -16,8 +16,8 @@
                     <div class="col-md-6 gameplay-column">
                         <img id="youwin-image" src="assets/images/you-win.png" alt="Winning Image" />
                         <img id="gameover-image" src="assets/images/gameover.png" alt="Game Over Image" />
-                        <h2 id="pressKeyTryAgain">Press Any Key to Try Again!</h2>
-                        <img id="hangmanImage" src="" alt="" />
+                        <h2 id="tryAgain">Press Any Key to Try Again!</h2>
+                        <img id="livesImage" src="" alt="" />
                     </div>
                     <div class="col-md-6 gameplay-column">
                         <h2>Press Any Key to Get Started!</h2>
@@ -43,37 +43,8 @@ PRESS THE BUTTON
 
 <script type="text/javascript">
     
-    $(function(ready) {
-        var library = ["A","B","C","D","E","F","G","H","I"];
-        var aWord = ["A","L","P","H","A","B","E","T"]
-        
-        $("#newWord").click(function(e){
-        
-            var newClass = parseInt(Math.floor(Math.random() * library.length));
-            console.log(library[parseInt(newClass)]);
-            var category = (library[parseInt(newClass)]);
-            document.getElementById("wordCard").innerHTML = category;
-            console.log(category);    
-
-
-            
-
-            
-
-            
-            
-            
-
-            
-
-
-        });
-    
-        
-
-
-
-    });
+    resetGame();
+    updateDisplay();
 
 
 </script>
