@@ -1,4 +1,12 @@
-#thisWord,
-#tryAgain,
-#gameover-image,
-#youwin-image,
+body {
+    height: 100%;
+    width: 100%;
+    
+    
+}
+
+#card {
+    outline-style: solid;
+  
+   width: 100%;
+}

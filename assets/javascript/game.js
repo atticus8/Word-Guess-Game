@@ -1,115 +1,79 @@
+var letters = ["a", "b", "c", "d", "e", "f", "g",];
 
-    
+// This array will hold what we guess
+var guessedLetters = [];
 
-    
-    var library = ["Alpha","Beta","C","Delta"];
-    const lives = 7;
-    var guessedLetters = [];
-    var currentWordIndex;
-    var thisWord = [];
-    var remainingGuesses = 0;
-    var start = false;
-    var finish = false;
+// This variable will be randomly assigned one of the three letters
+var letterToGuess = null;
 
-    function newGame() {
+// This is what we'll use to count down
+var guessesLeft = 9;
 
-        remainingGuesses = lives;
-        start = false;
+// This is the counter for wins/losses
+var wins = 0;
+var losses = 0;
 
-        currentWordIndex = Math.floor(Math.random() * (library.length));
-    
-        guessedLetters = [];
-        thisWord = [];
+/*
+var functionName = function(){
+    do something;
+}
+*/
 
-        document.getElementById("title-image").src = "";
+//updates guessesLeft
+var updateRemainingGuesses = function(){
 
-        for (var i = 0; i < library[currentWordIndex].length; i++) {
-            thisWord.push("_");
-        }
+    document.querySelector("#remainingGuesses").innerHTML = guessesLeft;
+};
 
-        document.getElementById("tryAgain").style.cssText = "display: none";
-        document.getElementById("gameover-image").style.cssText = "display: none";
-        document.getElementById("youwin-image").style.cssText = "display: none";
 
-            updateDisplay();
-    };
-
-    function updateDisplay() {
-
-        document.getElementById("currentWord").innerText = "";
-        for (var i = 0; i < thisWord.length; i++) {
-            document.getElementById("thisWord").innerText += thisWord[i];
-        }
-        document.getElementById("remainingGuesses").innerText = remainingGuesses;
-        document.getElementById("guessedLetters").innerText = guessedLetters;
-        if(remainingGuesses <= 0) {
-            document.getElementById("gameover-image").style.cssText = "display: block";
-            document.getElementById("tryAgain").style.cssText = "display: block";
-            finish = true
-        }
-    };
-
-    function updateImage() {
-        document.getElementById("livesImage").src = "assets/images/" + (lives - remainingGuesses) + ".png";
-    }
-    
-
-    document.onkeydown = function(event) {
-        if(finish) {
-            newGame();
-            finish = false;
-        } else {
-            if(event.keyCode >= 65 && event.keyCode <= 90) {
-                makeGuess(event.key.toLowerCase());
-            }
-        }
-    };
-
-    function makeGuess(letter) {
-        if (remainingGuesses > 0) {
-            if (!start) {
-                start = true;
-            }
-            if (guessedLetters.indexOf(letter) === -1) {
-                guessedLetters.push(letter);
-                evaluateGuess(letter);
-            }
-        }
-
-        updateDisplay();
-        checkWin();
-    };
-
-    function evaluateGuess(letter) {
-        var positions = [];
-
-        for (var i = 0; i < library[currentWordIndex].length; i++) {
-            if(library[currentWordIndex][i] === letter) {
-                positions.push(i);
-            }
-        }
-    
-        if (positions.length <= 0) {
-            remainingGuesses--;
-            updateHangmanImage();
-        } else {
-
-            for (var i=0; i < positions.length; i++) {
-                thisWord[positions[i]] = letter;
-            }
-        }
-    
-    
-    };
-
-    function checkWin() {
-        if(thisWord.indexof("_") === -1 {
-            document.getElementById("youwin-image").style.cssText = "display: block";
-            document.getElementById("tryAgain").style.cssText = "display: block";
-            wins++;
-            finish = true;
-        }
-
+//gets computer's letter
+var updateLetterGuessed = function(){
+    letterToGuess = letters[Math.floor(Math.random() * letters.length)];
     
 };
-        
+
+var guessesSoFarUpdate = function() {
+    document.querySelector("#guesses-so-far").innerHTML = guessedLetters.join(", ");
+    
+};
+
+
+
+//calling functions on page load
+var reset = function() {
+    guessesLeft = 9;
+    guessedLetters = [];
+    updateRemainingGuesses();
+    updateLetterGuessed();
+    guessesSoFarUpdate();
+    console.log(letterToGuess);
+};
+
+
+updateRemainingGuesses();
+updateLetterGuessed();
+
+document.onkeyup = function (event) {
+
+    guessesLeft--;
+
+    var letter = event.key.toLowerCase();
+    guessedLetters.push(letter);
+    updateRemainingGuesses();
+    guessesSoFarUpdate();
+
+
+
+if(letter === letterToGuess){
+    wins++;
+    document.querySelector("#wins").innerHTML = wins;
+    reset();
+}
+
+if(guessesLeft === 0){
+    losses++;
+    document.querySelector("#losses").innerHTML = losses;
+    reset();
+}
+
+};
