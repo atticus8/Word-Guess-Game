@@ -1,4 +1,4 @@
-var letters = ["a", "b", "c", "d", "e", "f", "g",];
+var letters = ["a", "b", "c", "d", "e", "f", "g","h"];
 
 // This array will hold what we guess
 var guessedLetters = [];
@@ -52,7 +52,7 @@ var reset = function() {
 
 updateRemainingGuesses();
 updateLetterGuessed();
-
+console.log(letterToGuess);
 document.onkeyup = function (event) {
 
     guessesLeft--;
